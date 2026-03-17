@@ -38,6 +38,42 @@ activities = {
       "schedule": "Segundas, quartas e sextas, 14h - 15h",
       "max_participants": 30,
       "participants": ["john@mergington.edu", "olivia@mergington.edu"]
+   },
+   "Futebol": {
+      "description": "Treino de futebol e participação em campeonatos",
+      "schedule": "Segundas e quartas, 16h - 17h30",
+      "max_participants": 25,
+      "participants": ["lucas@mergington.edu"]
+   },
+   "Voleibol": {
+      "description": "Treino de voleibol e jogos amistosos",
+      "schedule": "Terças e quintas, 16h30 - 18h",
+      "max_participants": 20,
+      "participants": ["marina@mergington.edu", "isabella@mergington.edu"]
+   },
+   "Clube de Teatro": {
+      "description": "Atuação, improvisação e produção de peças teatrais",
+      "schedule": "Quartas, 15h - 17h",
+      "max_participants": 15,
+      "participants": ["gabriel@mergington.edu"]
+   },
+   "Aula de Dança": {
+      "description": "Aprenda diferentes estilos de dança e coreografias",
+      "schedule": "Segundas, 16h - 17h",
+      "max_participants": 18,
+      "participants": ["carolina@mergington.edu", "ana@mergington.edu"]
+   },
+   "Clube de Debate": {
+      "description": "Desenvolvimento de habilidades de argumentação e oratória",
+      "schedule": "Quintas, 15h30 - 17h",
+      "max_participants": 12,
+      "participants": ["pedro@mergington.edu"]
+   },
+   "Clube de Ciências": {
+      "description": "Experimentos científicos e exploração de conceitos da física e química",
+      "schedule": "Sextas, 14h - 15h30",
+      "max_participants": 16,
+      "participants": ["julia@mergington.edu", "rafael@mergington.edu"]
    }
 }
 
@@ -61,6 +97,10 @@ def signup_for_activity(activity_name: str, email: str):
 
     # Get the specificy activity
     activity = activities[activity_name]
+
+    # Validar se o estudante já está inscrito
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Estudante já está inscrito na atividade")
 
     # Add student
     activity["participants"].append(email)
